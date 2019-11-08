@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+export DEBIAN_FRONTEND="noninteractive"
+
 echo "Install common tools"
 sudo dpkg --purge --force-depends ca-certificates-java
 sudo apt-get install -y apt-transport-https ca-certificates ca-certificates-java curl software-properties-common

@@ -28,8 +28,8 @@
       "spot_price_auto_product": "Linux/UNIX (Amazon VPC)",
       "ami_regions": "{{user `destination_regions`}}",
       "ssh_username": "ubuntu",
-      "ami_name": "jenkins-slave-0-linux-ubuntu-18.04-x86_64-hvm-ebs-{{timestamp}}",
-      "ami_description" : "Ubuntu 18.04 Linux Image for Jenkins Slave",
+      "ami_name": "jenkins-2.190.2-0-linux-ubuntu-18.04-x86_64-hvm-ebs-{{timestamp}}",
+      "ami_description" : "Ubuntu 18.04 Linux Image with Jenkins Server",
       "run_tags" : {
         "Name" : "packer-builder-docker"
       },
@@ -41,10 +41,14 @@
   ],
   "provisioners" : [
     {
+      "type" : "file",
+      "source" : "./master_configs/",
+      "destination" : "/tmp"
+    },
+    {
       "type" : "shell",
-      "script" : "./scripts/setup_slave.sh",
+      "script" : "./scripts/setup_master.sh",
       "execute_command" : "sudo -E -S sh '{{ .Path }}'"
     }
   ]
 }
-
