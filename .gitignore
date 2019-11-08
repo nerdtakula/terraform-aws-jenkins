@@ -1,0 +1,8 @@
+.terraform
+*_key.p*
+*tfstate*
+*.key
+*.crt
+*.csr
+*.plan
+
