@@ -57,6 +57,16 @@ variable "public_subnet_cidr" {
   default     = "10.0.0.0/24"
 }
 
+variable "ssl_cert_file" {
+  type        = string
+  description = "SSL cert file for website"
+}
+
+variable "ssl_cert_key" {
+  type        = string
+  description = "SSL cert KEY file for website"
+}
+
 variable "jenkins_username" {
   type        = string
   description = "Username for Jenkins Admin"
