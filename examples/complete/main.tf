@@ -42,7 +42,6 @@ module "jenkins" {
   slave_instance_type    = "t2.medium"
   region                 = local.region
   ssh_key_pair           = aws_key_pair.ssh_key.key_name
-  private_ssh_key        = "id_rsa"
   vpc_id                 = module.vpc.vpc_id
   ssl_cert_file          = "jenkins.nerdtakula.com.crt"
   ssl_cert_key           = "jenkins.nerdtakula.com.key"
