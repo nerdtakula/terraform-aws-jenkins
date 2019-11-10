@@ -83,7 +83,8 @@ resource "aws_instance" "jenkins_master" {
 
 /*
  * Create Jenkins Master Decurity Group
- */ resource "aws_security_group" "jenkins_master" {
+ */
+resource "aws_security_group" "jenkins_master" {
   name   = "${var.namespace}-${var.stage}-${var.name}-master-sec-grp"
   vpc_id = var.vpc_id
 
