@@ -59,11 +59,57 @@ resource "aws_instance" "jenkins_master" {
   monitoring                  = true
   associate_public_ip_address = true
   source_dest_check           = false
+  user_data                   = templatefile("${path.module}/scripts/setup_master.sh", { jenkins_version = var.jenkins_version })
 
   root_block_device {
     volume_type           = "gp2"
     volume_size           = 30
     delete_on_termination = true
+  }
+
+  # Copy in files needed to configure jenkins service (${path.module}/scripts/master/)
+  provisioner "file" {
+    content     = templatefile("${path.module}/scripts/master/basic-security.groovy", { jenkins_username = var.jenkins_username, jenkins_password = var.jenkins_password })
+    destination = "/tmp/basic-security.groovy"
+  }
+  provisioner "file" {
+    source      = "${path.module}/scripts/master/basic-security.groovy"
+    destination = "/tmp/basic-security.groovy"
+  }
+  provisioner "file" {
+    source      = "${path.module}/scripts/master/disable-cli.groovy"
+    destination = "/tmp/disable-cli.groovy"
+  }
+  provisioner "file" {
+    source      = "${path.module}/scripts/master/disable-jnlp.groovy"
+    destination = "/tmp/disable-jnlp.groovy"
+  }
+  provisioner "file" {
+    source      = "${path.module}/scripts/master/install-plugins.sh"
+    destination = "/tmp/install-plugins.sh"
+  }
+  provisioner "file" {
+    source      = "${path.module}/scripts/master/jenkins"
+    destination = "/tmp/jenkins"
+  }
+  provisioner "file" {
+    content     = templatefile("${path.module}/scripts/master/jenkins.install.UpgradeWizard.state", { jenkins_version = var.jenkins_version })
+    destination = "/tmp/jenkins.install.UpgradeWizard.state"
+  }
+  provisioner "file" {
+    source      = "${path.module}/scripts/master/node-agent.groovy"
+    destination = "/tmp/node-agent.groovy"
+  }
+  provisioner "file" {
+    source      = "${path.module}/scripts/master/plugins.txt"
+    destination = "/tmp/plugins.txt"
+  }
+
+
+
+  provisioner "file" {
+    content     = templatefile("${path.module}/scripts/master/jenkins.install.UpgradeWizard.state", { jenkins_version = var.jenkins_version })
+    destination = "/tmp/jenkins.install.UpgradeWizard.state"
   }
 
   tags = {
