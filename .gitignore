@@ -5,4 +5,4 @@
 *.crt
 *.csr
 *.plan
-
+*id_rsa*
