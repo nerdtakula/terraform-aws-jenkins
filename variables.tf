@@ -57,12 +57,6 @@ variable "public_subnet_cidr" {
   default     = "10.0.0.0/24"
 }
 
-variable "ssh_key_pair" {
-  type        = string
-  description = "Name of SSH key that will be deployed on Elastic Compute Cloud instances. The key should be present in AWS"
-  default     = ""
-}
-
 variable "jenkins_username" {
   type        = string
   description = "Username for Jenkins Admin"
