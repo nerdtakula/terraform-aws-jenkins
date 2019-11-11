@@ -67,6 +67,12 @@ variable "ssl_cert_key" {
   description = "SSL cert KEY file for website"
 }
 
+variable "jenkins_version" {
+  type        = string
+  description = "Version of jenkins to be installed"
+  default     = "2.190.2"
+}
+
 variable "jenkins_username" {
   type        = string
   description = "Username for Jenkins Admin"
