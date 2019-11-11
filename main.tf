@@ -67,6 +67,13 @@ resource "aws_instance" "jenkins_master" {
     delete_on_termination = true
   }
 
+  connection {
+    type        = "ssh"
+    private_key = file(var.private_ssh_key)
+    user        = "ubuntu"
+    host        = aws_instance.jenkins_master.public_ip
+  }
+
   # Copy in files needed to configure jenkins service (${path.module}/scripts/master/)
   provisioner "file" {
     content     = templatefile("${path.module}/scripts/master/basic-security.groovy", { jenkins_username = var.jenkins_username, jenkins_password = var.jenkins_password })

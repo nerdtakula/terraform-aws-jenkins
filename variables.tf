@@ -34,6 +34,12 @@ variable "ssh_key_pair" {
   default     = "id_rsa.pub"
 }
 
+variable "private_ssh_key" {
+  type        = string
+  description = "SSH Private key for SSH actions"
+  default     = "id_rsa"
+}
+
 variable "master_instance_type" {
   type        = string
   description = "EC2 instance type for Jenkins master, e.g. 't2.medium'"
