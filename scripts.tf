@@ -1,3 +1,13 @@
+data "template_file" "setup_master" {
+  template = "${file("${path.module}/scripts/setup_master.sh")}"
+
+  vars = {
+    jenkins_version = var.jenkins_version
+    ssl_cert_file   = var.ssl_cert_file
+    ssl_cert_key    = var.ssl_cert_key
+  }
+}
+
 data "template_file" "basic_security" {
   template = "${file("${path.module}/scripts/master/basic-security.groovy")}"
 

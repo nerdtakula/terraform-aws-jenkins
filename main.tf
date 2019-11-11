@@ -113,7 +113,7 @@ resource "aws_instance" "jenkins_master" {
   monitoring                  = true
   associate_public_ip_address = true
   source_dest_check           = false
-  user_data                   = templatefile("${path.module}/scripts/setup_master.sh", { jenkins_version = var.jenkins_version })
+  user_data                   = data.template_file.setup_master.rendered
 
   root_block_device {
     volume_type           = "gp2"
