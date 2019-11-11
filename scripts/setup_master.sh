@@ -53,10 +53,12 @@ sudo apt-get install -y nginx
 
 echo "Configure Nginx"
 ## TODO: Copy in SSL certs and site config
+sudo mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.prev
+sudo mv /tmp/nginx.conf /etc/nginx/nginx.conf
 sudo mkdir -p /etc/nginx/external
 sudo mv /tmp/${ssl_cert_file} /etc/nginx/external
 sudo mv /tmp/${ssl_cert_key} /etc/nginx/external
-sudo service restart nginx
+sudo service nginx restart
 
 echo "Clean up"
 sudo apt-get clean

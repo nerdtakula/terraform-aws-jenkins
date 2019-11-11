@@ -167,7 +167,7 @@ resource "aws_instance" "jenkins_master" {
   }
   provisioner "file" {
     content     = data.template_file.nginx_conf.rendered
-    destination = "/tmp/plugins.txt"
+    destination = "/tmp/nginx.conf"
   }
   provisioner "file" {
     source      = var.ssl_cert_file
