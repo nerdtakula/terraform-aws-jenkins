@@ -125,8 +125,7 @@ resource "aws_instance" "jenkins_master" {
     type        = "ssh"
     private_key = file(var.private_ssh_key)
     user        = "ubuntu"
-    host        = aws_eip.default.public_ip
-    # host        = aws_instance.jenkins_master.public_ip
+    host        = aws_instance.jenkins_master.public_ip
   }
 
   # Copy in files needed to configure jenkins service (${path.module}/scripts/master/)
