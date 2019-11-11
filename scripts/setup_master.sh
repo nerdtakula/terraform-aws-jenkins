@@ -46,14 +46,17 @@ chmod +x /tmp/install-plugins.sh
 bash /tmp/install-plugins.sh
 
 echo "Starting Jenkins"
-service jenkins start
+sudo service jenkins start
 
 echo "Install Nginx"
-sudo apt-get install nginx
+sudo apt-get install -y nginx
 
 echo "Configure Nginx"
 ## TODO: Copy in SSL certs and site config
-service restart nginx
+sudo mkdir -p /etc/nginx/external
+sudo mv /tmp/${ssl_cert_file} /etc/nginx/external
+sudo mv /tmp/${ssl_cert_key} /etc/nginx/external
+sudo service restart nginx
 
 echo "Clean up"
 sudo apt-get clean

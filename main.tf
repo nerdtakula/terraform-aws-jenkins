@@ -130,7 +130,6 @@ resource "aws_instance" "jenkins_master" {
 
   # Copy in files needed to configure jenkins service (${path.module}/scripts/master/)
   provisioner "file" {
-    # content     = templatefile("${path.module}/scripts/master/basic-security.groovy", { jenkins_username = var.jenkins_username, jenkins_password = var.jenkins_password })
     content     = data.template_file.basic_security.rendered
     destination = "/tmp/basic-security.groovy"
   }
@@ -155,7 +154,6 @@ resource "aws_instance" "jenkins_master" {
     destination = "/tmp/jenkins"
   }
   provisioner "file" {
-    # content     = templatefile("${path.module}/scripts/master/jenkins.install.UpgradeWizard.state", { jenkins_version = var.jenkins_version })
     content     = data.template_file.install_state.rendered
     destination = "/tmp/jenkins.install.UpgradeWizard.state"
   }
@@ -166,6 +164,18 @@ resource "aws_instance" "jenkins_master" {
   provisioner "file" {
     source      = "${path.module}/scripts/master/plugins.txt"
     destination = "/tmp/plugins.txt"
+  }
+  provisioner "file" {
+    content     = data.template_file.nginx_conf.rendered
+    destination = "/tmp/plugins.txt"
+  }
+  provisioner "file" {
+    source      = var.ssl_cert_file
+    destination = "/tmp/${var.ssl_cert_file}"
+  }
+  provisioner "file" {
+    source      = var.ssl_cert_key
+    destination = "/tmp/${var.ssl_cert_key}"
   }
 
   tags = {
