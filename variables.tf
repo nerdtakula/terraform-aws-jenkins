@@ -57,6 +57,11 @@ variable "vpc_id" {
   description = "ID of the VPC in which to provision the AWS resources"
 }
 
+variable "igw_id" {
+  type        = string
+  description = "ID of the Internet Gateway"
+}
+
 variable "public_subnet_cidr" {
   type        = string
   description = "CIDR for the Public Subnet"

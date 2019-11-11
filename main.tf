@@ -2,11 +2,65 @@
  * Public Subnet for Jenkins and Build Slaves
  */
 resource "aws_subnet" "public" {
-  vpc_id     = var.vpc_id
-  cidr_block = var.public_subnet_cidr
+  vpc_id                  = var.vpc_id
+  map_public_ip_on_launch = true
+  cidr_block              = var.public_subnet_cidr
 
   tags = {
     Name      = "${var.namespace}-${var.stage}-${var.name}-public-subnet"
+    Service   = var.name
+    NameSpace = var.namespace
+    Stage     = var.stage
+  }
+}
+
+
+resource "aws_route_table" "public" {
+  vpc_id = var.vpc_id
+
+  tags = {
+    Name      = "${var.namespace}-${var.stage}-${var.name}-public-route-table"
+    Service   = var.name
+    NameSpace = var.namespace
+    Stage     = var.stage
+  }
+}
+
+resource "aws_route" "public" {
+  route_table_id         = aws_route_table.public.id
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id             = var.igw_id
+}
+
+resource "aws_route_table_association" "public" {
+  subnet_id      = aws_subnet.public.id
+  route_table_id = aws_route_table.public.id
+}
+
+resource "aws_network_acl" "public" {
+  vpc_id     = var.vpc_id
+  subnet_ids = [aws_subnet.public.id]
+
+  egress {
+    rule_no    = 100
+    action     = "allow"
+    cidr_block = "0.0.0.0/0"
+    from_port  = 0
+    to_port    = 0
+    protocol   = "-1"
+  }
+
+  ingress {
+    rule_no    = 100
+    action     = "allow"
+    cidr_block = "0.0.0.0/0"
+    from_port  = 0
+    to_port    = 0
+    protocol   = "-1"
+  }
+
+  tags = {
+    Name      = "${var.namespace}-${var.stage}-${var.name}-public-network-acl"
     Service   = var.name
     NameSpace = var.namespace
     Stage     = var.stage
