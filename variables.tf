@@ -84,6 +84,11 @@ variable "jenkins_version" {
   default     = "2.190.2"
 }
 
+variable "domain_name" {
+  type        = string
+  description = "Domain name to use within configuration"
+}
+
 variable "jenkins_username" {
   type        = string
   description = "Username for Jenkins Admin"

@@ -47,6 +47,7 @@ module "jenkins" {
   igw_id                 = module.vpc.igw_id
   ssl_cert_file          = "jenkins.nerdtakula.com.crt"
   ssl_cert_key           = "jenkins.nerdtakula.com.key"
+  domain_name            = "jenkins.nerdtakula.com"
   jenkins_username       = "admin"
   jenkins_password       = "admin"
   jenkins_credentials_id = "aws-ec2-build-slave"
