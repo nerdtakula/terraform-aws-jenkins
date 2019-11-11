@@ -7,7 +7,7 @@ data "template_file" "basic_security" {
   }
 }
 
-data "template_file" "install-state" {
+data "template_file" "install_state" {
   template = "${file("${path.module}/scripts/master/jenkins.install.UpgradeWizard.state")}"
 
   vars = {
