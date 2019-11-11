@@ -130,7 +130,8 @@ resource "aws_instance" "jenkins_master" {
 
   # Copy in files needed to configure jenkins service (${path.module}/scripts/master/)
   provisioner "file" {
-    content     = templatefile("${path.module}/scripts/master/basic-security.groovy", { jenkins_username = var.jenkins_username, jenkins_password = var.jenkins_password })
+    # content     = templatefile("${path.module}/scripts/master/basic-security.groovy", { jenkins_username = var.jenkins_username, jenkins_password = var.jenkins_password })
+    content     = data.template_file.basic_security.rendered
     destination = "/tmp/basic-security.groovy"
   }
   provisioner "file" {
@@ -154,7 +155,8 @@ resource "aws_instance" "jenkins_master" {
     destination = "/tmp/jenkins"
   }
   provisioner "file" {
-    content     = templatefile("${path.module}/scripts/master/jenkins.install.UpgradeWizard.state", { jenkins_version = var.jenkins_version })
+    # content     = templatefile("${path.module}/scripts/master/jenkins.install.UpgradeWizard.state", { jenkins_version = var.jenkins_version })
+    content     = data.template_file.install_state.rendered
     destination = "/tmp/jenkins.install.UpgradeWizard.state"
   }
   provisioner "file" {
