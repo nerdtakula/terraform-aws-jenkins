@@ -113,7 +113,7 @@ resource "aws_instance" "jenkins_master" {
   monitoring                  = true
   associate_public_ip_address = true
   source_dest_check           = false
-  # user_data                   = templatefile("${path.module}/scripts/setup_master.sh", { jenkins_version = var.jenkins_version })
+  user_data                   = templatefile("${path.module}/scripts/setup_master.sh", { jenkins_version = var.jenkins_version })
 
   root_block_device {
     volume_type           = "gp2"
@@ -121,50 +121,51 @@ resource "aws_instance" "jenkins_master" {
     delete_on_termination = true
   }
 
-  # connection {
-  #   type        = "ssh"
-  #   private_key = file(var.private_ssh_key)
-  #   user        = "ubuntu"
-  #   host        = aws_instance.jenkins_master.public_ip
-  # }
+  connection {
+    type        = "ssh"
+    private_key = file(var.private_ssh_key)
+    user        = "ubuntu"
+    host        = aws_eip.default.public_ip
+    # host        = aws_instance.jenkins_master.public_ip
+  }
 
-  # # Copy in files needed to configure jenkins service (${path.module}/scripts/master/)
-  # provisioner "file" {
-  #   content     = templatefile("${path.module}/scripts/master/basic-security.groovy", { jenkins_username = var.jenkins_username, jenkins_password = var.jenkins_password })
-  #   destination = "/tmp/basic-security.groovy"
-  # }
-  # provisioner "file" {
-  #   source      = "${path.module}/scripts/master/basic-security.groovy"
-  #   destination = "/tmp/basic-security.groovy"
-  # }
-  # provisioner "file" {
-  #   source      = "${path.module}/scripts/master/disable-cli.groovy"
-  #   destination = "/tmp/disable-cli.groovy"
-  # }
-  # provisioner "file" {
-  #   source      = "${path.module}/scripts/master/disable-jnlp.groovy"
-  #   destination = "/tmp/disable-jnlp.groovy"
-  # }
-  # provisioner "file" {
-  #   source      = "${path.module}/scripts/master/install-plugins.sh"
-  #   destination = "/tmp/install-plugins.sh"
-  # }
-  # provisioner "file" {
-  #   source      = "${path.module}/scripts/master/jenkins"
-  #   destination = "/tmp/jenkins"
-  # }
-  # provisioner "file" {
-  #   content     = templatefile("${path.module}/scripts/master/jenkins.install.UpgradeWizard.state", { jenkins_version = var.jenkins_version })
-  #   destination = "/tmp/jenkins.install.UpgradeWizard.state"
-  # }
-  # provisioner "file" {
-  #   source      = "${path.module}/scripts/master/node-agent.groovy"
-  #   destination = "/tmp/node-agent.groovy"
-  # }
-  # provisioner "file" {
-  #   source      = "${path.module}/scripts/master/plugins.txt"
-  #   destination = "/tmp/plugins.txt"
-  # }
+  # Copy in files needed to configure jenkins service (${path.module}/scripts/master/)
+  provisioner "file" {
+    content     = templatefile("${path.module}/scripts/master/basic-security.groovy", { jenkins_username = var.jenkins_username, jenkins_password = var.jenkins_password })
+    destination = "/tmp/basic-security.groovy"
+  }
+  provisioner "file" {
+    source      = "${path.module}/scripts/master/basic-security.groovy"
+    destination = "/tmp/basic-security.groovy"
+  }
+  provisioner "file" {
+    source      = "${path.module}/scripts/master/disable-cli.groovy"
+    destination = "/tmp/disable-cli.groovy"
+  }
+  provisioner "file" {
+    source      = "${path.module}/scripts/master/disable-jnlp.groovy"
+    destination = "/tmp/disable-jnlp.groovy"
+  }
+  provisioner "file" {
+    source      = "${path.module}/scripts/master/install-plugins.sh"
+    destination = "/tmp/install-plugins.sh"
+  }
+  provisioner "file" {
+    source      = "${path.module}/scripts/master/jenkins"
+    destination = "/tmp/jenkins"
+  }
+  provisioner "file" {
+    content     = templatefile("${path.module}/scripts/master/jenkins.install.UpgradeWizard.state", { jenkins_version = var.jenkins_version })
+    destination = "/tmp/jenkins.install.UpgradeWizard.state"
+  }
+  provisioner "file" {
+    source      = "${path.module}/scripts/master/node-agent.groovy"
+    destination = "/tmp/node-agent.groovy"
+  }
+  provisioner "file" {
+    source      = "${path.module}/scripts/master/plugins.txt"
+    destination = "/tmp/plugins.txt"
+  }
 
   tags = {
     Name      = "${var.namespace}-${var.stage}-${var.name}-master"
