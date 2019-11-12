@@ -116,3 +116,14 @@ variable "max_jenkins_slaves" {
   description = "Max number of jenkins slaves that can be started"
   default     = 4
 }
+
+variable "jenkins_slave_private_ssh_key" {
+  type        = string
+  description = "Private SSH key used to communicate between master and slaves"
+  default     = "id_rsa_nodes"
+}
+variable "jenkins_slave_public_ssh_key" {
+  type        = string
+  description = "Public SSH key used to communicate between master and slaves"
+  default     = "id_rsa_nodes.pub"
+}

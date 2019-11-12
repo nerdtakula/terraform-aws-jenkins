@@ -181,6 +181,14 @@ resource "aws_instance" "jenkins_master" {
     source      = var.ssl_cert_key
     destination = "/tmp/${var.ssl_cert_key}"
   }
+  provisioner "file" {
+    source      = var.jenkins_slave_private_ssh_key
+    destination = "/tmp/id_rsa"
+  }
+  provisioner "file" {
+    source      = var.jenkins_slave_public_ssh_key
+    destination = "/tmp/id_rsa.pub"
+  }
 
   tags = {
     Name      = "${var.namespace}-${var.stage}-${var.name}-master"
