@@ -14,8 +14,6 @@ data "template_file" "basic_security" {
   vars = {
     jenkins_username = var.jenkins_username
     jenkins_password = var.jenkins_password
-    ssl_cert_file    = var.ssl_cert_file
-    ssl_cert_key     = var.ssl_cert_key
   }
 }
 

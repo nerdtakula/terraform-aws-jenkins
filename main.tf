@@ -134,10 +134,6 @@ resource "aws_instance" "jenkins_master" {
     destination = "/tmp/basic-security.groovy"
   }
   provisioner "file" {
-    source      = "${path.module}/scripts/master/basic-security.groovy"
-    destination = "/tmp/basic-security.groovy"
-  }
-  provisioner "file" {
     source      = "${path.module}/scripts/master/disable-cli.groovy"
     destination = "/tmp/disable-cli.groovy"
   }

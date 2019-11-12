@@ -19,6 +19,7 @@ sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sou
 sudo apt-get update
 sudo add-apt-repository universe
 sudo apt-get install -y jenkins=${jenkins_version}
+sudo service jenkins stop
 
 echo "Install git"
 sudo apt-get install -y git
@@ -40,7 +41,7 @@ sudo mv /tmp/csrf-protection.groovy /var/lib/jenkins/init.groovy.d/csrf-protecti
 sudo mv /tmp/disable-jnlp.groovy /var/lib/jenkins/init.groovy.d/disable-jnlp.groovy
 sudo mv /tmp/jenkins.install.UpgradeWizard.state /var/lib/jenkins/jenkins.install.UpgradeWizard.state
 sudo mv /tmp/node-agent.groovy /var/lib/jenkins/init.groovy.d/node-agent.groovy
-sudo chown -R jenkins:jenkins /var/lib/jenkins/jenkins.install.UpgradeWizard.state
+sudo chown -R jenkins:jenkins /var/lib/jenkins/jenkins.install.UpgradeWizard.state /var/lib/jenkins/init.groovy.d/
 sudo mv /tmp/jenkins /etc/default/jenkins
 sudo chmod +x /tmp/install-plugins.sh
 sudo bash /tmp/install-plugins.sh
