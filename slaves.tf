@@ -92,7 +92,7 @@ resource "aws_security_group" "jenkins_slaves" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["${aws_instance.jenkins_master.private_ip}/24"]
+    cidr_blocks = [var.public_subnet_cidr]
   }
 
   tags = {
