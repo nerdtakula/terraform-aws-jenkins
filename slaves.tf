@@ -40,7 +40,7 @@ resource "aws_launch_configuration" "slaves" {
 resource "aws_autoscaling_group" "jenkins_slaves" {
   name                      = "${var.namespace}-${var.stage}-${var.name}-slave-asg"
   launch_configuration      = aws_launch_configuration.slaves.name
-  vpc_zone_identifier       = [aws_subnet.default.id]
+  vpc_zone_identifier       = [aws_subnet.public.id]
   min_size                  = var.min_jenkins_slaves
   max_size                  = var.max_jenkins_slaves
   force_delete              = false
