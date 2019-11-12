@@ -7,7 +7,7 @@ sudo dpkg --purge --force-depends ca-certificates-java
 sudo apt-get install -y apt-transport-https ca-certificates-java ca-certificates curl software-properties-common unzip
 
 echo "Install Java JDK 8"
-sudo apt-get remove -y java
+sudo apt-get remove -y java openjdk-9-jdk
 sudo add-apt-repository ppa:openjdk-r/ppa -y
 sudo apt-get update
 sudo apt-get install -y openjdk-8-jdk
