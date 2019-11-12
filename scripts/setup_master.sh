@@ -20,6 +20,7 @@ sudo apt-get update
 sudo add-apt-repository universe
 sudo apt-get install -y jenkins=${jenkins_version}
 sudo service jenkins stop
+sudo rm -f /etc/init.d/jenkins
 
 echo "Install git"
 sudo apt-get install -y git
@@ -47,7 +48,9 @@ sudo chmod +x /tmp/install-plugins.sh
 sudo bash /tmp/install-plugins.sh
 
 echo "Starting Jenkins"
-sudo service jenkins start
+sudo mv /tmp/jenkins.service /etc/systemd/system/jenkins.service
+systemctl daemon-reload
+systemctl restart jenkins
 
 echo "Install Nginx"
 sudo apt-get install -y nginx

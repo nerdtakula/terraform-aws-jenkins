@@ -154,6 +154,10 @@ resource "aws_instance" "jenkins_master" {
     destination = "/tmp/jenkins"
   }
   provisioner "file" {
+    source      = "${path.module}/scripts/master/jenkins.service"
+    destination = "/tmp/jenkins.service"
+  }
+  provisioner "file" {
     content     = data.template_file.install_state.rendered
     destination = "/tmp/jenkins.install.UpgradeWizard.state"
   }
