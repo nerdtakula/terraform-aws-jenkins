@@ -17,7 +17,7 @@ slavesPrivateKey = new com.cloudbees.jenkins.plugins.sshcredentials.impl.BasicSS
 CredentialsScope.GLOBAL,
 "jenkins-slaves",
 "ec2-user",
-new BasicSSHUserPrivateKey.UsersPrivateKeySource(),
+new com.cloudbees.jenkins.plugins.sshcredentials.impl.BasicSSHUserPrivateKey.UsersPrivateKeySource(),
 "",
 ""
 )
@@ -26,7 +26,7 @@ managersPrivateKey = new com.cloudbees.jenkins.plugins.sshcredentials.impl.Basic
 CredentialsScope.GLOBAL,
 "swarm-managers",
 "ec2-user",
-new BasicSSHUserPrivateKey.UsersPrivateKeySource(),
+new com.cloudbees.jenkins.plugins.sshcredentials.impl.BasicSSHUserPrivateKey.UsersPrivateKeySource(),
 "",
 ""
 )
