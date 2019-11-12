@@ -129,6 +129,10 @@ resource "aws_instance" "jenkins_master" {
   }
 
   # Copy in files needed to configure jenkins service (${path.module}/scripts/master/)
+  # provisioner "file" {
+  #   content     = data.template_file.setup_master.rendered
+  #   destination = "/tmp/setup_master.sh"
+  # }
   provisioner "file" {
     content     = data.template_file.basic_security.rendered
     destination = "/tmp/basic-security.groovy"
