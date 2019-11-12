@@ -17,7 +17,7 @@ data "template_file" "user_data_slave" {
  */
 resource "aws_launch_configuration" "slaves" {
   name            = "${var.namespace}-${var.stage}-${var.name}-slave-launch-config"
-  image_id        = data.aws_ami.jenkins_slave.id
+  image_id        = data.aws_ami.ubuntu.id
   instance_type   = var.slave_instance_type
   key_name        = var.ssh_key_pair
   security_groups = [aws_security_group.jenkins_slaves.id]
