@@ -34,14 +34,14 @@ sudo chmod 700 /var/lib/jenkins/.ssh
 # sudo chmod 600 /var/lib/jenkins/.ssh/id_rsa
 
 echo "Configure Jenkins"
-sudo mkdir -p /var/lib/jenkins/init.groovy.d
-sudo mv /tmp/basic-security.groovy /var/lib/jenkins/init.groovy.d/basic-security.groovy
-sudo mv /tmp/disable-cli.groovy /var/lib/jenkins/init.groovy.d/disable-cli.groovy
-sudo mv /tmp/csrf-protection.groovy /var/lib/jenkins/init.groovy.d/csrf-protection.groovy
-sudo mv /tmp/disable-jnlp.groovy /var/lib/jenkins/init.groovy.d/disable-jnlp.groovy
-sudo mv /tmp/jenkins.install.UpgradeWizard.state /var/lib/jenkins/jenkins.install.UpgradeWizard.state
-sudo mv /tmp/node-agent.groovy /var/lib/jenkins/init.groovy.d/node-agent.groovy
-sudo chown -R jenkins:jenkins /var/lib/jenkins/jenkins.install.UpgradeWizard.state /var/lib/jenkins/init.groovy.d/
+# sudo mkdir -p /var/lib/jenkins/init.groovy.d
+# sudo mv /tmp/basic-security.groovy /var/lib/jenkins/init.groovy.d/basic-security.groovy
+# sudo mv /tmp/disable-cli.groovy /var/lib/jenkins/init.groovy.d/disable-cli.groovy
+# sudo mv /tmp/csrf-protection.groovy /var/lib/jenkins/init.groovy.d/csrf-protection.groovy
+# sudo mv /tmp/disable-jnlp.groovy /var/lib/jenkins/init.groovy.d/disable-jnlp.groovy
+# sudo mv /tmp/jenkins.install.UpgradeWizard.state /var/lib/jenkins/jenkins.install.UpgradeWizard.state
+# sudo mv /tmp/node-agent.groovy /var/lib/jenkins/init.groovy.d/node-agent.groovy
+# sudo chown -R jenkins:jenkins /var/lib/jenkins/jenkins.install.UpgradeWizard.state /var/lib/jenkins/init.groovy.d/
 sudo mv /tmp/jenkins /etc/default/jenkins
 sudo chmod +x /tmp/install-plugins.sh
 sudo bash /tmp/install-plugins.sh
