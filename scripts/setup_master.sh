@@ -24,26 +24,26 @@ echo "Install git"
 sudo apt-get install -y git
 
 echo "Setup SSH key"
-mkdir /var/lib/jenkins/.ssh
-touch /var/lib/jenkins/.ssh/known_hosts
-chown -R jenkins:jenkins /var/lib/jenkins/.ssh
-chmod 700 /var/lib/jenkins/.ssh
+sudo mkdir /var/lib/jenkins/.ssh
+sudo touch /var/lib/jenkins/.ssh/known_hosts
+sudo chown -R jenkins:jenkins /var/lib/jenkins/.ssh
+sudo chmod 700 /var/lib/jenkins/.ssh
 ## TODO: get private key to jenkins
-# mv /tmp/id_rsa /var/lib/jenkins/.ssh/id_rsa
-# chmod 600 /var/lib/jenkins/.ssh/id_rsa
+# sudo mv /tmp/id_rsa /var/lib/jenkins/.ssh/id_rsa
+# sudo chmod 600 /var/lib/jenkins/.ssh/id_rsa
 
 echo "Configure Jenkins"
-mkdir -p /var/lib/jenkins/init.groovy.d
-mv /tmp/basic-security.groovy /var/lib/jenkins/init.groovy.d/basic-security.groovy
-mv /tmp/disable-cli.groovy /var/lib/jenkins/init.groovy.d/disable-cli.groovy
-mv /tmp/csrf-protection.groovy /var/lib/jenkins/init.groovy.d/csrf-protection.groovy
-mv /tmp/disable-jnlp.groovy /var/lib/jenkins/init.groovy.d/disable-jnlp.groovy
-mv /tmp/jenkins.install.UpgradeWizard.state /var/lib/jenkins/jenkins.install.UpgradeWizard.state
-mv /tmp/node-agent.groovy /var/lib/jenkins/init.groovy.d/node-agent.groovy
-chown -R jenkins:jenkins /var/lib/jenkins/jenkins.install.UpgradeWizard.state
-mv /tmp/jenkins /etc/default/jenkins
-chmod +x /tmp/install-plugins.sh
-bash /tmp/install-plugins.sh
+sudo mkdir -p /var/lib/jenkins/init.groovy.d
+sudo mv /tmp/basic-security.groovy /var/lib/jenkins/init.groovy.d/basic-security.groovy
+sudo mv /tmp/disable-cli.groovy /var/lib/jenkins/init.groovy.d/disable-cli.groovy
+sudo mv /tmp/csrf-protection.groovy /var/lib/jenkins/init.groovy.d/csrf-protection.groovy
+sudo mv /tmp/disable-jnlp.groovy /var/lib/jenkins/init.groovy.d/disable-jnlp.groovy
+sudo mv /tmp/jenkins.install.UpgradeWizard.state /var/lib/jenkins/jenkins.install.UpgradeWizard.state
+sudo mv /tmp/node-agent.groovy /var/lib/jenkins/init.groovy.d/node-agent.groovy
+sudo chown -R jenkins:jenkins /var/lib/jenkins/jenkins.install.UpgradeWizard.state
+sudo mv /tmp/jenkins /etc/default/jenkins
+sudo chmod +x /tmp/install-plugins.sh
+sudo bash /tmp/install-plugins.sh
 
 echo "Starting Jenkins"
 sudo service jenkins start
@@ -52,7 +52,6 @@ echo "Install Nginx"
 sudo apt-get install -y nginx
 
 echo "Configure Nginx"
-## TODO: Copy in SSL certs and site config
 sudo mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.prev
 sudo mv /tmp/nginx.conf /etc/nginx/nginx.conf
 sudo mkdir -p /etc/nginx/external

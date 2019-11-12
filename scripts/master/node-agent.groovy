@@ -13,7 +13,7 @@ println "--> creating SSH credentials"
 domain = Domain.global()
 store = Jenkins.instance.getExtensionList('com.cloudbees.plugins.credentials.SystemCredentialsProvider')[0].getStore()
 
-slavesPrivateKey = new BasicSSHUserPrivateKey(
+slavesPrivateKey = new com.cloudbees.jenkins.plugins.sshcredentials.impl.BasicSSHUserPrivateKey(
 CredentialsScope.GLOBAL,
 "jenkins-slaves",
 "ec2-user",
@@ -22,7 +22,7 @@ new BasicSSHUserPrivateKey.UsersPrivateKeySource(),
 ""
 )
 
-managersPrivateKey = new BasicSSHUserPrivateKey(
+managersPrivateKey = new com.cloudbees.jenkins.plugins.sshcredentials.impl.BasicSSHUserPrivateKey(
 CredentialsScope.GLOBAL,
 "swarm-managers",
 "ec2-user",
@@ -31,21 +31,21 @@ new BasicSSHUserPrivateKey.UsersPrivateKeySource(),
 ""
 )
 
-githubCredentials = new UsernamePasswordCredentialsImpl(
-  CredentialsScope.GLOBAL,
-  "github", "Github credentials",
-  "USERNAME",
-  "PASSWORD"
-)
+// githubCredentials = new com.cloudbees.jenkins.plugins.sshcredentials.impl.UsernamePasswordCredentialsImpl(
+//   CredentialsScope.GLOBAL,
+//   "github", "Github credentials",
+//   "USERNAME",
+//   "PASSWORD"
+// )
 
-registryCredentials = new UsernamePasswordCredentialsImpl(
-  CredentialsScope.GLOBAL,
-  "registry", "Docker Registry credentials",
-  "USERNAME",
-  "PASSWORD"
-)
+// registryCredentials = new com.cloudbees.jenkins.plugins.sshcredentials.impl.UsernamePasswordCredentialsImpl(
+//   CredentialsScope.GLOBAL,
+//   "registry", "Docker Registry credentials",
+//   "USERNAME",
+//   "PASSWORD"
+// )
 
 store.addCredentials(domain, slavesPrivateKey)
 store.addCredentials(domain, managersPrivateKey)
-store.addCredentials(domain, githubCredentials)
-store.addCredentials(domain, registryCredentials)
+// store.addCredentials(domain, githubCredentials)
+// store.addCredentials(domain, registryCredentials)
