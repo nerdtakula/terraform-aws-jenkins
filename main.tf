@@ -186,12 +186,8 @@ resource "aws_instance" "jenkins_master" {
     destination = "/tmp/${var.ssl_cert_key}"
   }
   provisioner "file" {
-    source      = var.jenkins_slave_private_ssh_key
+    source      = var.private_ssh_key
     destination = "/tmp/id_rsa"
-  }
-  provisioner "file" {
-    source      = var.jenkins_slave_public_ssh_key
-    destination = "/tmp/id_rsa.pub"
   }
 
   provisioner "remote-exec" {

@@ -16,7 +16,7 @@ store = Jenkins.instance.getExtensionList('com.cloudbees.plugins.credentials.Sys
 slavesPrivateKey = new com.cloudbees.jenkins.plugins.sshcredentials.impl.BasicSSHUserPrivateKey(
 CredentialsScope.GLOBAL,
 "jenkins-slaves",
-"ec2-user",
+"ubuntu",
 new com.cloudbees.jenkins.plugins.sshcredentials.impl.BasicSSHUserPrivateKey.UsersPrivateKeySource(),
 "",
 ""
@@ -25,7 +25,7 @@ new com.cloudbees.jenkins.plugins.sshcredentials.impl.BasicSSHUserPrivateKey.Use
 managersPrivateKey = new com.cloudbees.jenkins.plugins.sshcredentials.impl.BasicSSHUserPrivateKey(
 CredentialsScope.GLOBAL,
 "swarm-managers",
-"ec2-user",
+"ubuntu",
 new com.cloudbees.jenkins.plugins.sshcredentials.impl.BasicSSHUserPrivateKey.UsersPrivateKeySource(),
 "",
 ""

@@ -17,7 +17,7 @@ import jenkins.model.Jenkins
 import hudson.plugins.sshslaves.SSHLauncher
 DumbSlave dumb = new DumbSlave("'$INSTANCE_NAME'",
 "'$INSTANCE_NAME'",
-"/home/jenkins",
+"/home/ubuntu",
 "3",
 Mode.NORMAL,
 "slaves",
