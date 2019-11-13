@@ -34,3 +34,11 @@ data "template_file" "nginx_conf" {
     ssl_cert_key  = var.ssl_cert_key
   }
 }
+
+data "template_file" "root_url" {
+  template = "${file("${path.module}/scripts/master/root-url.groovy")}"
+
+  vars = {
+    domain_name = var.domain_name
+  }
+}

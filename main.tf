@@ -189,6 +189,14 @@ resource "aws_instance" "jenkins_master" {
     source      = var.private_ssh_key
     destination = "/tmp/id_rsa"
   }
+  provisioner "file" {
+    content     = data.template_file.root_url.rendered
+    destination = "/tmp/root-url.groovy"
+  }
+  provisioner "file" {
+    source      = "${path.module}/scripts/master/setup-completed.groovy"
+    destination = "/tmp/setup-completed.groovy"
+  }
 
   provisioner "remote-exec" {
     inline = [
@@ -233,6 +241,14 @@ resource "aws_security_group" "jenkins_master" {
     to_port     = 80
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  # Inbound HTTP on Port 8080 for build slaves from VPC subnet only
+  ingress {
+    from_port   = 8080
+    to_port     = 8080
+    protocol    = "tcp"
+    cidr_blocks = [var.public_subnet_cidr]
   }
 
   # Inbound HTTPS from anywhere

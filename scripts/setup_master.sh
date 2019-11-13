@@ -41,6 +41,8 @@ sudo mv /tmp/csrf-protection.groovy /var/lib/jenkins/init.groovy.d/csrf-protecti
 sudo mv /tmp/disable-jnlp.groovy /var/lib/jenkins/init.groovy.d/disable-jnlp.groovy
 sudo mv /tmp/jenkins.install.UpgradeWizard.state /var/lib/jenkins/jenkins.install.UpgradeWizard.state
 sudo mv /tmp/node-agent.groovy /var/lib/jenkins/init.groovy.d/node-agent.groovy
+sudo mv /tmp/root-url.groovy /var/lib/jenkins/init.groovy.d/root-url.groovy
+sudo mv /tmp/setup-completed.groovy /var/lib/jenkins/init.groovy.d/setup-completed.groovy
 sudo chown -R jenkins:jenkins /var/lib/jenkins/jenkins.install.UpgradeWizard.state /var/lib/jenkins/init.groovy.d/
 sudo mv /tmp/jenkins /etc/default/jenkins
 sudo chmod +x /tmp/install-plugins.sh
