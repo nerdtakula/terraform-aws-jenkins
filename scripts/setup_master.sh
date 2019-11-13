@@ -19,7 +19,7 @@ sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sou
 sudo apt-get update
 sudo add-apt-repository universe
 sudo apt-get install -y jenkins=${jenkins_version}
-sudo service jenkins stop
+service jenkins stop
 sudo rm -f /etc/init.d/jenkins
 
 echo "Install git"
@@ -60,7 +60,7 @@ sudo mv /tmp/nginx.conf /etc/nginx/nginx.conf
 sudo mkdir -p /etc/nginx/external
 sudo mv /tmp/${ssl_cert_file} /etc/nginx/external
 sudo mv /tmp/${ssl_cert_key} /etc/nginx/external
-sudo service nginx restart
+service nginx restart
 
 echo "Clean up"
 sudo apt-get clean

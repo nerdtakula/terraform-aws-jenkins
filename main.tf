@@ -138,6 +138,10 @@ resource "aws_instance" "jenkins_master" {
     destination = "/tmp/basic-security.groovy"
   }
   provisioner "file" {
+    source      = "${path.module}/scripts/master/csrf-protection.groovy"
+    destination = "/tmp/csrf-protection.groovy"
+  }
+  provisioner "file" {
     source      = "${path.module}/scripts/master/disable-cli.groovy"
     destination = "/tmp/disable-cli.groovy"
   }
@@ -193,7 +197,7 @@ resource "aws_instance" "jenkins_master" {
   provisioner "remote-exec" {
     inline = [
       "chmod +x /tmp/setup_master.sh",
-      "/tmp/setup_master.sh",
+      "sudo /tmp/setup_master.sh",
     ]
   }
 
