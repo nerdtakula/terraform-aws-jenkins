@@ -113,7 +113,7 @@ resource "aws_instance" "jenkins_master" {
   monitoring                  = true
   associate_public_ip_address = true
   source_dest_check           = false
-  user_data                   = data.template_file.setup_master.rendered
+  # user_data                   = data.template_file.setup_master.rendered
 
   root_block_device {
     volume_type           = "gp2"
@@ -129,10 +129,10 @@ resource "aws_instance" "jenkins_master" {
   }
 
   # Copy in files needed to configure jenkins service (${path.module}/scripts/master/)
-  # provisioner "file" {
-  #   content     = data.template_file.setup_master.rendered
-  #   destination = "/tmp/setup_master.sh"
-  # }
+  provisioner "file" {
+    content     = data.template_file.setup_master.rendered
+    destination = "/tmp/setup_master.sh"
+  }
   provisioner "file" {
     content     = data.template_file.basic_security.rendered
     destination = "/tmp/basic-security.groovy"
@@ -188,6 +188,13 @@ resource "aws_instance" "jenkins_master" {
   provisioner "file" {
     source      = var.jenkins_slave_public_ssh_key
     destination = "/tmp/id_rsa.pub"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x /tmp/setup_master.sh",
+      "/tmp/setup_master.sh",
+    ]
   }
 
   tags = {
