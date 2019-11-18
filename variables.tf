@@ -116,3 +116,8 @@ variable "max_jenkins_slaves" {
   description = "Max number of jenkins slaves that can be started"
   default     = 4
 }
+
+variable "data_storage_ebs_name" {
+  type        = string
+  description = "name of EBS volume for persistent storage"
+}

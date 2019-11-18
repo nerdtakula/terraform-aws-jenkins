@@ -114,10 +114,11 @@ resource "aws_instance" "jenkins_master" {
   associate_public_ip_address = true
   source_dest_check           = false
   # user_data                   = data.template_file.setup_master.rendered
+  user_data = "${file("${path.module}/scripts/master/setup_mount_device.sh")}"
 
   root_block_device {
     volume_type           = "gp2"
-    volume_size           = 30
+    volume_size           = 10
     delete_on_termination = true
   }
 
