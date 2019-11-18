@@ -82,6 +82,24 @@ resource "aws_eip" "default" {
   }
 }
 
+# /*
+#  * Persistent storage for instance
+#  */
+# resource "aws_volume_attachment" "persistent_storage" {
+#   device_name = "/dev/xvdf"
+#   volume_id   = data.aws_ebs_volume.persistent_storage.id
+#   instance_id = aws_instance.jenkins_master.id
+# }
+
+# data "aws_ebs_volume" "persistent_storage" {
+#   most_recent = true
+
+#   filter {
+#     name   = "tag:Name"
+#     values = [var.data_storage_ebs_name]
+#   }
+# }
+
 /*
  * Lookup up Ubuntu AMI for jenkins servers
  */
@@ -113,8 +131,7 @@ resource "aws_instance" "jenkins_master" {
   monitoring                  = true
   associate_public_ip_address = true
   source_dest_check           = false
-  # user_data                   = data.template_file.setup_master.rendered
-  user_data = "${file("${path.module}/scripts/master/setup_mount_device.sh")}"
+  # user_data = "${file("${path.module}/scripts/master/setup_mount_device.sh")}"
 
   root_block_device {
     volume_type           = "gp2"

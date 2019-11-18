@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-MOUNT_POINT="/mnt/gitlab-data"
+MOUNT_POINT="/mnt/jenkins-data"
 
 # Wait for disk to mount 
 while [ ! -e /dev/xvdf ]; do sleep 1; done

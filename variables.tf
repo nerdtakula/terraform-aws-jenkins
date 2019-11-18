@@ -117,7 +117,7 @@ variable "max_jenkins_slaves" {
   default     = 4
 }
 
-variable "data_storage_ebs_name" {
-  type        = string
-  description = "name of EBS volume for persistent storage"
-}
+# variable "data_storage_ebs_name" {
+#   type        = string
+#   description = "name of EBS volume for persistent storage"
+# }
